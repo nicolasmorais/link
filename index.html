@@ -1,0 +1,21 @@
+<script type="text/javascript">
+    window.onload = function() {
+        var desktopFallback = "https://web.whatsapp.com/send?phone=5562995603104",
+            mobileFallback = "https://api.whatsapp.com/send?phone=5562995603104E",
+            app = "whatsapp://send?phone=5562995603104";
+
+        if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            window.location = app;
+            window.setTimeout(function() {
+                window.location = mobileFallback;
+            }, 50); // Alterado para 50 milissegundos para um carregamento mais rápido
+        } else {
+            window.location = desktopFallback;
+        }
+
+        function killPopup() {
+            window.removeEventListener('pagehide', killPopup);
+        }
+        window.addEventListener('pagehide', killPopup);
+    };
+</script>
